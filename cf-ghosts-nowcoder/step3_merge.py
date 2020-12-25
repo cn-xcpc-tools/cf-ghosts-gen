@@ -31,7 +31,7 @@ for teamId in teams:
 				break
 			jobj = json.loads(line)
 			subTime = datetime.fromtimestamp(jobj['submitTime'] / 1000.0).replace(tzinfo=start_time.tzinfo)
-			if subTime < end_time:
+			if subTime <= end_time:
 				jobj['submitRelativeTime'] = int((subTime - start_time).seconds)
 				subs[jobj['submissionId']] = jobj
 
