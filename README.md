@@ -3,7 +3,7 @@
 This is a project for storing the ghost participants for Codeforces Gym.
 
 - DOMjudge: Run `cf-ghosts-dj.php` via web with database
-- HUSTOJ: Code lost :(
+- HUSTOJ: Run `cf-ghosts-hustoj.php` via web with database (not sure whether this is for CCPC modified or not)
 - HDU OJ: Run `cf-ghosts-hdoj.py` via local computer
 - PTA: Run `cf-ghosts-pta.py` via local computer
 - Nowcoder: Reference to `cf-ghosts-nowcoder\README.md`
