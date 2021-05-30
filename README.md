@@ -7,6 +7,7 @@ This is a project for storing the ghost participants for Codeforces Gym.
 - HDU OJ: Run `cf-ghosts-hdoj.py` via local computer
 - PTA: Run `cf-ghosts-pta.py` via local computer
 - Nowcoder: Reference to `cf-ghosts-nowcoder\README.md`
+- CCS API Endpoint Dumps: With `contest.json`, `submissions.json`, `teams.json`, `groups.json`, `problems.json`, `judgements.json` in current directory, run `cf-ghosts-ccsapi.py`
 
 If you don't want to run PHPs with web, you can modify several variables, execute it with local command line and get the content from standard output.
 
