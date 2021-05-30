@@ -10,3 +10,6 @@ This is a project for storing the ghost participants for Codeforces Gym.
 
 If you don't want to run PHPs with web, you can modify several variables, execute it with local command line and get the content from standard output.
 
+### Bonus
+
+Modify the front of `onekey_domjudge_dump.py` and it will dump all the endpoints.
