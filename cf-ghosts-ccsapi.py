@@ -22,19 +22,24 @@ raw_teams = readJson('teams.json')
 raw_judgings = readJson('judgements.json')
 raw_problems = readJson('problems.json')
 raw_groups = readJson('groups.json')
+raw_organizations = readJson('organizations.json')
 mapped_judgings = dict()
 allowed_categories = dict()
+organizations = dict()
 probs = dict()
 probs2 = dict()
 teams = dict()
 subed_team = dict()
 
+for o in raw_organizations:
+	organizations[o['id']] = o
+
 for j in raw_judgings:
-	if j['valid']:
+	if (not 'valid' in j) or j['valid']:
 		mapped_judgings[j['submission_id']] = j['judgement_type_id']
 
 for c in raw_groups:
-	if not c['hidden']:
+	if (not 'hidden' in c) or (not c['hidden']):
 		allowed_categories[c['id']] = c
 
 for p in raw_problems:
@@ -70,8 +75,10 @@ for t in raw_teams:
 	if hidden:
 		continue
 	name = t['name']
-	if t['affiliation'] != None:
+	if 'affiliation' in t and t['affiliation'] != None:
 		name = name + ' (' + t['affiliation'] + ')'
+	elif 'organization_id' in t and t['organization_id'] != None:
+		name = name + ' (' + organizations[t['organization_id']]['formal_name'] + ')'
 	teams[t['id']] = name
 	if not t['id'] in subed_team:
 		max_sid = max_sid + 1
