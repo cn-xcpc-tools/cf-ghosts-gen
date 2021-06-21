@@ -61,7 +61,7 @@ for s in raw_submissions:
 	stat['prob'] = probs2[s['problem_id']]
 	stat['time'] = int((time - start_time).seconds)
 	stat['team'] = s['team_id']
-	res[stat['id']] = stat
+	res[int(s['id'])] = stat
 	subed_team[s['team_id']] = True
 	sid2 = int(s['id'])
 	if max_sid < sid2:
@@ -82,7 +82,7 @@ for t in raw_teams:
 	teams[t['id']] = name
 	if not t['id'] in subed_team:
 		max_sid = max_sid + 1
-		res[str(max_sid)] = { 'id': str(max_sid), 'verdict': 'CE', 'prob': 'A', 'time': 99999, 'team': t['id'] }
+		res[max_sid] = { 'id': str(max_sid), 'verdict': 'CE', 'prob': 'A', 'time': 99999, 'team': t['id'] }
 
 lss = dict()
 def last_submit(prob, team):
