@@ -1,3 +1,6 @@
 *.json
 *.pyc
 *.dat
+
+.DS_Store
+.vscode/
