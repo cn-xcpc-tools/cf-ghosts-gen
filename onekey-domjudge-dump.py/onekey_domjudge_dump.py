@@ -75,7 +75,7 @@ def downloadSourceCodeFiles(sid):
         logger.error('An error occurred during request GET {}'.format(url))
         exit()
 
-    with open(os.path.join(submissions_dir, str(sid), "files.zip"), 'wb') as f:
+    with open(os.path.join(submissions_dir, str(sid), 'files.zip'), 'wb') as f:
         f.write(res.content)
 
 
@@ -115,7 +115,7 @@ def main():
         r = json.loads(requestJsonAndSave('runs?limit=10000', 'runs.1.json'))
 
         i = 2
-        saved_filename = ""
+        saved_filename = ''
         while len(r) != 0:
             endpoint = 'runs?limit=10000&first_id={}'.format(
                 str(int(r[-1]['id'])+1))
@@ -141,7 +141,7 @@ def main():
 
             i = i + 1
             if i % 50 == 0:
-                logging.info("Submissions {}/{}".format(str(i), str(total)))
+                logging.info('Submissions {}/{}'.format(str(i), str(total)))
 
 
 main()
