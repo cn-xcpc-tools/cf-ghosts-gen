@@ -1,3 +1,9 @@
 *.json
 *.pyc
 *.dat
+
+.DS_Store
+.vscode/
+
+data/
+venv/
