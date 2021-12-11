@@ -6,6 +6,7 @@ from time import time, sleep
 import logging
 import requests
 import shutil
+from urllib import parse
 
 cid = 1
 base_url = 'http://127.0.0.1/domjudge'
@@ -42,10 +43,10 @@ def initLogging():
 
 
 def requestJson(endpoint):
-    url = os.path.join(base_url, str(cid))
+    url = parse.urljoin(base_url, str(cid))
 
     if len(endpoint) > 0:
-        url = os.path.join(url, endpoint)
+        url = parse.urljoin(url, endpoint)
 
     logger.info('GET {}'.format(url))
     res = requests.get(url=url, headers=headers)
@@ -68,7 +69,7 @@ def requestJsonAndSave(endpoint, filename):
 
 
 def downloadSourceCodeFiles(sid):
-    url = os.path.join(base_url, str(cid), 'submissions', str(sid), 'files')
+    url = parse.urljoin(base_url, str(cid), 'submissions', str(sid), 'files')
     res = requests.get(url=url, headers=headers)
 
     if res.status_code != 200:
@@ -80,7 +81,7 @@ def downloadSourceCodeFiles(sid):
 
 
 def getSourceCodeJson(sid):
-    text = requestJson(os.path.join('submissions', str(sid), 'source-code'))
+    text = requestJson(parse.urljoin('submissions', str(sid), 'source-code'))
 
     with open(os.path.join(submissions_dir, str(sid), 'source-code.json'), 'w') as f:
         f.write(text)
