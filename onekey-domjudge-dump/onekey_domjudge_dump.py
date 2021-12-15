@@ -6,7 +6,6 @@ from time import time, sleep
 import logging
 import requests
 import shutil
-from urllib import parse
 
 cid = 1
 base_url = 'http://127.0.0.1/domjudge'
@@ -27,6 +26,15 @@ def ensure_dir(_path):
     if not os.path.exists(_path):
         os.makedirs(_path)
 
+def urlJoin(url, *args):
+    url = url.rstrip('/')
+
+    for arg in args:
+        arg = arg.strip('/')
+        url = "{}/{}".format(url, arg)
+
+    return url
+
 
 def initLogging():
     global logger
@@ -43,10 +51,10 @@ def initLogging():
 
 
 def requestJson(endpoint):
-    url = parse.urljoin(base_url, str(cid))
+    url = urlJoin(base_url, str(cid))
 
     if len(endpoint) > 0:
-        url = parse.urljoin(url, endpoint)
+        url = urlJoin(url, endpoint)
 
     logger.info('GET {}'.format(url))
     res = requests.get(url=url, headers=headers)
@@ -56,7 +64,7 @@ def requestJson(endpoint):
         logger.error('An error occurred during request.')
         exit()
 
-    return res.text
+    return res.content.decode('unicode-escape')
 
 
 def requestJsonAndSave(endpoint, filename):
@@ -69,7 +77,7 @@ def requestJsonAndSave(endpoint, filename):
 
 
 def downloadSourceCodeFiles(sid):
-    url = parse.urljoin(base_url, str(cid), 'submissions', str(sid), 'files')
+    url = urlJoin(base_url, str(cid), 'submissions', str(sid), 'files')
     res = requests.get(url=url, headers=headers)
 
     if res.status_code != 200:
@@ -81,7 +89,7 @@ def downloadSourceCodeFiles(sid):
 
 
 def getSourceCodeJson(sid):
-    text = requestJson(parse.urljoin('submissions', str(sid), 'source-code'))
+    text = requestJson(urlJoin('submissions', str(sid), 'source-code'))
 
     with open(os.path.join(submissions_dir, str(sid), 'source-code.json'), 'w') as f:
         f.write(text)
