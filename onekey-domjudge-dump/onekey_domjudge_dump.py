@@ -6,6 +6,7 @@ from time import time, sleep
 import logging
 import requests
 import shutil
+from urllib import parse
 
 cid = 1
 base_url = 'http://127.0.0.1/domjudge'
@@ -25,6 +26,7 @@ submissions_dir = os.path.join(saved_dir, 'submissions')
 def ensure_dir(_path):
     if not os.path.exists(_path):
         os.makedirs(_path)
+
 
 def urlJoin(url, *args):
     url = url.rstrip('/')
