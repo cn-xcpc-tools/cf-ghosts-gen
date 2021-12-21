@@ -2,9 +2,7 @@
 
 由于牛客的某些设置比较神秘，所以得分好几个阶段来处理。
 
-请在使用前清空当前文件夹的 `*.ndjson`。
-
-1. 修改 `nowcoder_common.py` 中开头的几个信息，例如 `cookie`, `contestid`, `start_time`, `end_time`
+1. 复制一份 `config-example.py` 并且命名为 `config.py`，然后按需修改其中的配置信息，例如 `cookie`, `contestid`, `start_time`, `end_time`
 
 2. 运行 `step1_fetch.py` 将数据爬取到本地
 
@@ -29,4 +27,3 @@
    注意需要学校名时将 `teams[t]['userName']` 改为 `teams[t]['team']` 即可
 
 5. 结束啦~
-

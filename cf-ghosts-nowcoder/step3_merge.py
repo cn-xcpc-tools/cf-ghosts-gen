@@ -7,7 +7,7 @@ teams = dict()
 probs = dict()
 subs = dict()
 
-with open('nowcoder-teams-c' + str(contestid) + '.ndjson', 'r', encoding='utf-8') as f:
+with open(os.path.join(cache_dir, 'nowcoder-teams-c' + str(contestid) + '.ndjson'), 'r', encoding='utf-8') as f:
 	while True:
 		line = f.readline()
 		if not line:
@@ -15,7 +15,7 @@ with open('nowcoder-teams-c' + str(contestid) + '.ndjson', 'r', encoding='utf-8'
 		jobj = json.loads(line)
 		teams[jobj['uid']] = jobj
 
-with open('nowcoder-probs-c' + str(contestid) + '.ndjson', 'r', encoding='utf-8') as f:
+with open(os.path.join(cache_dir, 'nowcoder-probs-c' + str(contestid) + '.ndjson'), 'r', encoding='utf-8') as f:
 	while True:
 		line = f.readline()
 		if not line:
@@ -24,7 +24,7 @@ with open('nowcoder-probs-c' + str(contestid) + '.ndjson', 'r', encoding='utf-8'
 		probs[jobj['index']] = jobj
 
 for teamId in teams:
-	with open('nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson', 'r', encoding='utf-8') as f:
+	with open(os.path.join(cache_dir, 'nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson'), 'r', encoding='utf-8') as f:
 		while True:
 			line = f.readline()
 			if not line:
