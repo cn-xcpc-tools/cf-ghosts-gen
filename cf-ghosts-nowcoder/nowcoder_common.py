@@ -41,7 +41,7 @@ verdicts = {
 	"段错误": "RT",
 	"代码太长": "CE",
 	"返回非零": "RT",
-	"执行出错": "RJ",
+	"执行出错": "RT",
 }
 
 def ensure_dir(_path):
