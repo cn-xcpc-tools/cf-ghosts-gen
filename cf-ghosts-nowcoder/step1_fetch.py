@@ -80,15 +80,23 @@ def load_submissions(teamId, teamName, probId, probIdx):
 	notice_fix_run(teamId, teamName, probId, probIdx)
 	return dict()
 
+def clear_data():
+	for dir in [cache_dir, data_dir]:
+		if os.path.join(dir):
+			shutil.rmtree(dir)
+		
+		ensure_dir(dir)
+
+clear_data()
 probs = load_probs()
 teams = load_teams()
 
-with open('nowcoder-teams-c' + str(contestid) + '.ndjson', 'w', encoding='utf-8') as f:
+with open(os.path.join(cache_dir, 'nowcoder-teams-c' + str(contestid) + '.ndjson'), 'w', encoding='utf-8') as f:
 	for t in teams:
 		f.write(json.dumps(teams[t], ensure_ascii=False))
 		f.write('\n')
 
-with open('nowcoder-probs-c' + str(contestid) + '.ndjson', 'w', encoding='utf-8') as f:
+with open(os.path.join(cache_dir, 'nowcoder-probs-c' + str(contestid) + '.ndjson'), 'w', encoding='utf-8') as f:
 	for t in probs:
 		f.write(json.dumps(probs[t], ensure_ascii=False))
 		f.write('\n')
@@ -109,7 +117,7 @@ for teamId in teams:
 	if prog % 10 == 1:
 		print('progress: ' + str(prog) + ' / ' + str(totprog), file=sys.stderr)
 	prog = prog + 1
-	with open('nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson', 'w', encoding='utf-8') as f:
+	with open(os.path.join(cache_dir, 'nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson'), 'w', encoding='utf-8') as f:
 		for t in subs:
 			f.write(json.dumps(subs[t], ensure_ascii=False))
 			f.write('\n')

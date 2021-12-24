@@ -47,7 +47,7 @@ def load_submissions_without_saving(teamId, teamName, probId, probIdx):
 
 def load_submissions(teamName, teamId, probId, probIdx):
 	subs = load_submissions_without_saving(teamId, teamName, probId, probIdx)
-	with open('nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson', 'a', encoding='utf-8') as f:
+	with open(os.path.join(cache_dir, 'nowcoder-submissions-c' + str(contestid) + '-t' + str(teamId) + '.ndjson'), 'a', encoding='utf-8') as f:
 		for t in subs:
 			f.write(json.dumps(subs[t], ensure_ascii=False))
 			f.write('\n')

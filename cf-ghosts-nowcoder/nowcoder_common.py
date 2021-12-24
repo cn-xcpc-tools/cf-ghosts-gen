@@ -10,18 +10,17 @@ import urllib3
 import requests
 import dateutil.parser
 import urllib.parse
+import shutil
+from config import *
 
-contestid = '9925'
 teamid_offset = 1030000000
 useragent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363'
-cookie = '' # Your cookie (copy from HTTP Request header)
-start_time = dateutil.parser.parse('2020-12-13T11:00:00+08:00')
-end_time = dateutil.parser.parse('2020-12-13T16:00:00+08:00')
 http = requests.Session()
 
-for co in cookie.split('; '):
-	idx = co.index('=')
-	http.cookies.set(co[:idx], co[idx+1:])
+if len(cookie) > 0:
+	for co in cookie.split('; '):
+		idx = co.index('=')
+		http.cookies.set(co[:idx], co[idx+1:])
 
 def req(url):
 	headers = { 'Accept': 'application/json', 'User-Agent': useragent, 'Referer': 'https://ac.nowcoder.com/acm/contest/' + contestid }
@@ -41,5 +40,10 @@ verdicts = {
 	"浮点错误": "RT",
 	"段错误": "RT",
 	"代码太长": "CE",
-	"返回非零": "RT"
+	"返回非零": "RT",
+	"执行出错": "RT",
 }
+
+def ensure_dir(_path):
+	if not os.path.exists(_path):
+		os.makedirs(_path)
